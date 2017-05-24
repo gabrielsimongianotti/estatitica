@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html land="pr-BR">
+<head>
+    <meta charset="utf-8"/>
+    <title> Tabela quantitativa continua </title>
+    <link rel="stylesheet" href="style.css">
+	<style>
+		table{ 
+			background-color:White;
+		}
+	</style>
+	<script>
+
+	var somadoxifi=0;
+	var rxifi=[];
+    var i=0;
+	var manumero=[];
+	var menumero=[];
+    var numero = new Array();
+    var quantidade = new Array();
+	var n=0;
+	var lista = [];
+	var divisaodoxifi=[];
+    function calcular(){
+		var a;
+		var a2;
+        manumero[i] = parseFloat(document.getElementById("manumero").value);
+		menumero[i] = parseFloat(document.getElementById("menumero").value);
+		numero[i] = (manumero[i]+menumero[i])/2
+        quantidade[i] = parseFloat(document.getElementById("q").value);
+        n=quantidade[i]+n;
+		a = ("ultimos valores digitados, quatidade "+ quantidade[i]+", numeros "+menumero[i]+" |-- " + manumero[i]);
+        if(quantidade[i] >= 2) {
+			for(a2=0; a2<quantidade[i]; a2++){
+				lista.push(numero[i]);
+			}
+		} else {
+			lista.push(numero[i]);
+		}
+		i++;
+		document.getElementById("resultado").innerHTML= a
+    }
+	function f(){
+		var p=new Array ();
+		var a;
+		for (a=0;a<i;a++){
+			p[a]=(quantidade[a]*100)/n;
+		}
+		xifi(p);
+	}
+		function xifi(p){
+		var nxf;
+		for(nxf=0;nxf<i;nxf++){
+			rxifi[nxf]=numero[nxf]*quantidade[nxf];
+			somadoxifi= somadoxifi+rxifi[nxf];
+		}
+
+		varialcias(p);
+	}
+	function varialcias(p){
+		var nq; //numero qualquer 
+		var varialcia=[];
+		for(nq=0;nq<i;nq++){
+			divisaodoxifi[nq]=((numero[nq]-(somadoxifi/n))*(numero[nq]-(somadoxifi/n)))*quantidade[nq];
+			varialcia = varialcia+divisaodoxifi[nq];
+		}
+		tabela(p,varialcia);
+	}
+	function tabela(p,varialcia){
+		var u;
+		var e=0;
+		var nomev = (document.getElementById("nomedavariavel").value);
+		var nomeq = (document.getElementById("nomedaquantidade").value);
+		var o=0;
+		var relatorio = "<tr> <th>classes</th> <th>"+ nomev +" </th> <th> "+ nomeq +" </th> <th> Xi </th> <th>XiFi</th> <th> Fr% </th> <th> F </th> <th> F% </th> <th> variancia </th></tr>";
+		for(u=0;u<i;u++){
+			e=e+quantidade[u];
+			o=p[u] +o;
+			relatorio = relatorio + "<tr> <td>classes "+(u+1)+"</td> <td>" + (menumero[u]) +" |-- "+ (manumero[u]) + "</td> <td> " + (quantidade[u]) + "</td> <td>" +(numero[u])+" </td><td>"+numero[u]*quantidade[u]+"</td> <td> "+ p[u].toFixed(2) +"% </td> <td>"+ e +"</td> <td>"+ o.toFixed(2) +"</td> <td>"+divisaodoxifi[u]+"</td> </tr>";
+			document.getElementById("tabe").innerHTML = relatorio;
+		}
+		//var valor1=1;
+		//var saco;
+		//saco=(varialcia.toFixed(1));
+		//valor1=Math.sqrt(saco);
+		
+		 //var tosetempo = ("desvio padrão: "+ valor1 );
+		//document.getElementById("dv").innerHTML = tosetempo;
+		media();
+	}
+	function media(){
+		var media=0;
+		var contador;
+		var blabla=0;// blabla é i divizor			
+		for (contador=0;contador<=i;contador++){
+			if (contador===i){
+				break;
+			}			
+		media = (numero[contador]*quantidade[contador])+media;
+		blabla=  blabla+quantidade[contador];
+		}
+		var resposta=("media: "+(media/blabla).toFixed(2));
+		document.getElementById("media").innerHTML =resposta;
+
+		mediana();
+	}
+	function mediana(){
+		lista = lista.sort();
+		var posicao1; //posição da primeira possição
+		var posicao2; //posição da segunda ou do meio
+		posicao1= parseFloat(lista.length/2);
+		//alert(lista.length);
+		if((lista.length)%2==0){ //par
+			posicao1 -= 1;
+			posicao2 = posicao1 + 1;
+			console.log('posicao 1 : ' + posicao1 + 'posicao 2 =  ' + posicao2);
+			var c =0;
+			c=((lista[posicao1]+lista[posicao2])/2);
+			var b = ("a mediana é "+ c);
+			}
+		else{ //imprar
+			posicao1 += 0.5;		
+			console.log(posicao1)
+			var b = ("a mediana é "+ lista[posicao1]);
+		}
+		document.getElementById("mediana").innerHTML = b;
+		moda();
+	}
+	function moda(){
+		var n;
+		var pivo = 0;
+		var l = 0;
+		var u = 1;
+		var b=0;
+		var y = 1;
+		var locavetor = new Array();
+		pivo = quantidade[0];
+		b = numero[0];
+		locavetor[0] = b;
+		for(n=1;n<i;n++){
+			if(pivo == quantidade[n]){
+				locavetor[u]=numero[n];
+				u++;
+				}
+				if(pivo<quantidade[n]){
+					l=n;
+					pivo = quantidade[n];
+					var locavetor = new Array();
+					locavetor[0]=numero[n];
+					u=1;
+			}
+		}	
+		var moda;
+		moda= "moda: "+ locavetor;
+		document.getElementById("moda").innerHTML =moda;
+	}
+	function zero(){
+		location.reload();
+		}
+	function graficos(){
+		//alert
+		}
+		
+</script>
+</head>
+<body>
+	<div>
+		<header>
+			<font color="white"><h1> Tabela quantitativa continua </h1></font>
+			<font color="white">
+				<h2>
+					nome da variavel de pesquisa <input type="text" id="nomedavariavel"/> 
+					variavel de maior valor <input type="number" id="manumero"/> 
+					variavel de menor valor <input type="number" id="menumero"/> 
+				</h2>
+			</font>
+			<font color="white">
+				<h2> 
+					nome da quantidade<input type="text" id="nomedaquantidade"/> 
+					quantidade <input type="number" id="q"/>
+				</h2>
+			</font>
+			<BR/>
+			<div class="btn-list">
+				<a class="btn-1" onclick="calcular()"> Calcular</a>
+				<a class="btn-2" onclick="f()">gerartabela</a>
+				<a class="btn-3" onclick="zero()">zerar valores</a>
+				<a class="btn-4" onclick="graficos()">graficos</a>
+				<a href="index.html"  class="btn-1" > voltar para tela inicial </a>
+			</div>
+			<font color="white">
+				<h2 id="resultado"></h2>
+			<font>
+		</header>
+			<BR/>
+			<font color="white">
+				<h2 id="media"></h2>
+			<font>
+			<BR/>
+			<font color="white">
+				<h2 id="mediana"></h2>
+			<font>
+			<BR/>
+			<font color="white">
+				<h2 id="moda"></h2>
+			<font>
+				<font color="white">
+				<h2 id="dv"></h2>
+			<font>
+			<BR/>
+		<section class = "table-holder">
+			<table id="tabe" class="login" border="1" > 
+				
+			</table>
+		</section>
+	</div>
+</body>
+</html>

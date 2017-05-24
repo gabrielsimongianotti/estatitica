@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html land="pr-BR"/>
+	<head>
+		<meta charset="utf-8"/>
+		<title> Distribuição Poisson </title>
+		<link rel="stylesheet" href="style.css">
+		<style>
+			table{
+				background-color:white;
+			}
+		</style>
+		<script>
+			function calcular(){
+				var h = parseFloat(document.getElementById("lambida").value);
+				var x = parseFloat(document.getElementById("xi").value);
+				var e = 2.71828;
+				var n = x; 
+				var p = 1;
+				if(x===0){
+					p=1;
+				}
+				else{
+					while(n>0){
+						p=p*n;
+						n--;
+					}
+				}				
+				p=(Math.pow(h, x))/(p*Math.pow(e, (h)));
+				alert((p*100).toFixed(2) +" %");
+			}
+		</script>
+	</head>
+	<body>
+		<div>
+			<header>
+				<font color="white">
+					<h1>
+					Distribuição Poisson
+					</h1>
+				</font>
+				<font color="white">
+					<h2>
+						λ <input type="number" id="lambida"/>
+						intervalo<input type="number" id="xi"/>
+					</h2>
+				</font>
+				<BR/>
+				<div class="btn-list">
+					<a class="bln-1" onclick ="calcular()">calcular</a>
+					<a href="index.html"  class="btn-1" > voltar para tela inicial </a>
+				</div>
+			</header>
+		</div>
+	</body>
+</html>

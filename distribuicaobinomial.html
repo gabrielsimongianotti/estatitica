@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html land="pr-BR">
+	<head>
+		<meta charset="utf-8"/>
+		<title>Distribuição Binomial</title>
+		<link rel="stylesheet" href="style.css">
+		<style>
+			table{
+				background-color:white;
+			}
+		</style>
+		<script>
+			function calcular(){
+				var p = [];
+				var n = [];
+				n[0]= parseInt(document.getElementById("n").value);
+				n[1]= parseInt(document.getElementById("k").value);
+				su= parseFloat(document.getElementById("s").value);
+				var e=1-su;
+				console.log(su);
+				//console.log(n[1]);
+				
+				var n3;
+				n3 = n[0] - n[1];
+				console.log("e^ = "+e+", su^ = "+su);
+				p[0]=1;
+				p[1]=1;
+				p[2]=1;
+				var r0 = n[1];
+				var r3 = n3;
+				console.log("r3 "+ r3)
+				while(n[0]>0){
+					p[0]=p[0]*n[0];
+					n[0]--;
+				}
+				while(n[1]>0){
+					p[1]=p[1]*n[1];
+					n[1]--;
+				}
+				while(n3>0){
+					p[2]=p[2]*n3;
+					n3--;
+				}
+				console.log("p[2] :"+p[2]);
+				console.log("p[1] :"+p[1]);
+				console.log("p[0] :"+p[0]);
+				su=Math.pow(su, r0);
+				e=Math.pow(e, r3);
+				su= su.toFixed(4);
+				e=e.toFixed(4);
+				console.log("e = "+e+", su = "+su);
+				var res=((p[0])/(p[1]*p[2]))
+				res= res.toFixed(4)
+				//var r=(((p[0])/(p[1]*p[2]))*su.toFixed(4)* e.toFixed(4));
+				var r= res * su * e;
+				r=r*100;
+				console.log(r.toFixed(3))
+				alert (r.toFixed(3)+"%");
+			}
+		</script>
+	</head>
+	<body>
+		<div>
+			<header>
+				<font color="white">	
+					<h2>
+					Distribuição binomial
+					</h2>
+					<BR/>
+					<h2>
+						n <input type="text" id="n"/> 
+						k <input type="number" id="k"/> 
+						p <input type="number" id="s"/> 
+					</h2>
+					<BR/>
+					<div class="btn-list">
+						<a class="btn-1" onclick="calcular()"> Calcular</a>
+						<a class="btn-3" onclick="zero()">zerar valores</a>
+						<a class="btn-4" onclick="graficos()">graficos</a>
+						<a href="index.html"  class="btn-1" > voltar para tela inicial </a>
+					</div>
+			</header>
+		</div>
+	</body>
+</html>

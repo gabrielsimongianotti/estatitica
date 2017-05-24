@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html land="pr-BR"/>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Distribuição normal </title>
+		<link rel="stylesheet" href="style.css">
+		<style>
+			table{
+				background-color:white;
+			}
+		</style>
+		<script>
+		var ztabela;
+		var total=0;
+			function calcular(){
+				var x = parseFloat(document.getElementById("numero").value);
+				var xm = parseFloat(document.getElementById("medio").value);
+				var dp = parseFloat(document.getElementById("desviopadao").value);
+				var z;
+				var e = 2.71828;
+				var pi = 3.14159;
+				z=(x-xm)/dp;
+				alert(z.toFixed(2));
+				ztabela = parseFloat(prompt(" digite o z"));
+				ztabela= ztabela-0.5;
+				alert((ztabela.toFixed(4))*100+"%");
+			}
+			function soma(){
+				total=ztabela+total;
+				document.getElementById("resultado").innerHTML=total;
+				ztabela=0;
+			}
+			function zerar(){
+				location.reload();
+			}
+		</script>
+	</head>
+	<body>
+		<div>
+			<header>
+				<font color="white">
+					<h2>
+						numeroa a ser transformado <input type="number" id="numero"/>
+						medio <input type="number" id="medio"/>
+						desvio padrão <input type="number"id="desviopadao"/>
+					</h2>
+				</font>
+				<BR/>
+				<div class="btn-list">
+					<a class="bln-1" onclick = "calcular()">calcular</a>
+					<a class="bln-1" onclick = "soma()">somar</a>
+					<a class="bln-1" onclick = "zerar()">zerar</a>
+					<a href="index.html"  class="btn-1" > voltar para tela inicial </a>
+				</div>
+				<font color="white">
+					<h2 id="resultado"></h2>
+				</font>
+			</header>
+		</div>
+	</body>
+</html>

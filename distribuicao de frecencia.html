@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html land="pr-BR">
+<head>
+    <meta charset="utf-8"/>
+    <title> Tabela Qualitativa </title>
+    <link rel="stylesheet" href="style.css">
+	<style>
+		table{ 
+			background-color:White;
+		}
+	</style>
+	<script>
+    var i=0;
+    var numero = new Array();
+    var quantidade = new Array();
+	var n=0;
+	var lista = [];
+    function calcular(){
+		var a;
+		var a2;
+        numero[i] = parseFloat(document.getElementById("numero").value);
+        quantidade[i] = parseFloat(document.getElementById("q").value);
+        n=quantidade[i]+n;
+		a = ("ultimos valores digitados, quatidade "+ quantidade[i]+", numeros "+numero[i] )
+        if(quantidade[i] >= 2) {
+			for(a2=0; a2<quantidade[i]; a2++){
+				lista.push(numero[i]);
+			}
+		} else {
+			lista.push(numero[i]);
+		}
+		i++;
+		document.getElementById("resultado").innerHTML= a
+    }
+	function f(){
+		var p=new Array ();
+		var a;
+		for (a=0;a<i;a++){
+			p[a]=(quantidade[a]*100)/n;
+		}
+		tabela(p);
+	}
+	function tabela(p){
+		var u;
+		var e=0;
+		var nomev = (document.getElementById("nomedavariavel").value);
+		var nomeq = (document.getElementById("nomedaquantidade").value);
+		var o=0;
+		var relatorio = "<tr> <th>"+ nomev +" </th> <th> "+ nomeq +" </th> <th> Fr% </th> <th> F </th> <th> F% </th></tr>";
+		for(u=0;u<i;u++){
+			e=e+quantidade[u];
+			o=p[u] +o;
+			relatorio = relatorio + "<tr> <td>" + (numero[u]) + "</td> <td> " + (quantidade[u]) + "</td><td>( "+ quantidade[u] +"* 100)/ "+ n +" = "+ p[u].toFixed(2) +"% </td> <td>"+ e +"</td> <td>"+ o.toFixed(2) +"</td> </tr>";
+			document.getElementById("tabe").innerHTML = relatorio;
+		}	
+		media();
+	}
+	function media(){
+		var media=0;
+		var contador;
+		var blabla=0;// blabla é i divizor			
+		for (contador=0;contador<=i;contador++){
+			if (contador===i){
+				break;
+			}			
+		media = (numero[contador]*quantidade[contador])+media;
+		blabla=  blabla+quantidade[contador];
+		}
+		var resposta=("media: "+(media/blabla).toFixed(2));
+		document.getElementById("media").innerHTML =resposta;
+		mediana();
+	}
+	function mediana(){
+		lista = lista.sort();
+		var posicao1; //posição da primeira possição
+		var posicao2; //posição da segunda ou do meio
+		posicao1= parseFloat(lista.length/2);
+		//alert(lista.length);
+		if((lista.length)%2==0){ //par
+			posicao1 -= 1;
+			posicao2 = posicao1 + 1;
+			console.log('posicao 1 : ' + posicao1 + 'posicao 2 =  ' + posicao2);
+			var c =0;
+			c=((lista[posicao1]+lista[posicao2])/2);
+			var b = ("a mediana é "+ c);
+			}
+		else{ //imprar
+			posicao1 += 0.5;		
+			console.log(posicao1)
+			var b = ("a mediana é "+ lista[posicao1]);
+		}
+		document.getElementById("mediana").innerHTML = b;
+		moda();
+	}
+	function moda(){
+		var n;
+		var pivo = 0;
+		var l = 0;
+		var u = 1;
+		var b=0;
+		var y = 1;
+		var locavetor = new Array();
+		pivo = quantidade[0];
+		b = numero[0];
+		locavetor[0] = b;
+		for(n=1;n<i;n++){
+			if(pivo == quantidade[n]){
+				locavetor[u]=numero[n];
+				u++;
+				}
+				if(pivo<quantidade[n]){
+					l=n;
+					pivo = quantidade[n];
+					var locavetor = new Array();
+					locavetor[0]=numero[n];
+					u=1;
+			}
+		}	
+		var moda;
+		moda= "moda: "+ locavetor;
+		document.getElementById("moda").innerHTML =moda;
+	}
+	function zero(){
+		location.reload();
+		}
+	function graficos(){
+		//alert
+		}
+</script>
+</head>
+<body>
+	<div>
+		<header>
+			<font color="white"><h1>  Tabela Qualitativa </h1></font>
+			<font color="white">
+				<h2>
+					nome da variavel de pesquisa <input type="text" id="nomedavariavel"/> 
+					variavel de pesquisa <input type="number" id="numero"/> 
+				</h2>
+			</font>
+			<font color="white">
+				<h2> 
+					nome da quantidade<input type="text" id="nomedaquantidade"/> 
+					quantidade <input type="number" id="q"/>
+				</h2>
+			</font>
+			<BR/>
+			<div class="btn-list">
+				<a class="btn-1" onclick="calcular()"> Calcular</a>
+				<a class="btn-2" onclick="f()">gerartabela</a>
+				<a class="btn-3" onclick="zero()">zerar valores</a>
+				<a class="btn-4" onclick="graficos()">graficos</a>
+				<a href="index.html"  class="btn-1" > voltar para tela inicial </a>
+			</div>
+			<font color="white">
+				<h2 id="resultado"></h2>
+			<font>
+		</header>
+			<BR/>
+			<font color="white">
+				<h2 id="media"></h2>
+			<font>
+			<BR/>
+			<font color="white">
+				<h2 id="mediana"></h2>
+			<font>
+			<BR/>
+			<font color="white">
+				<h2 id="moda"></h2>
+			<font>
+			<BR/>
+		<section class = "table-holder">
+			<table id="tabe" class="login" border="1" > 
+				
+			</table>
+		</section>
+	</div>
+</body>
+
+</html>

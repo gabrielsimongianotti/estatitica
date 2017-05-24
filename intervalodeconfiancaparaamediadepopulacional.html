@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html land="pr-BR"/>
+	<head>
+		<meta charset="utf-8"/>
+		<title> Intervalo de confiansa </title>
+		<link rel="stylesheet" href="style.css">
+		<style>
+			table{
+				background-color:white;
+			}
+		</style>
+		<script>
+			function calcular(){
+				var p = parseFloat(document.getElementById("por").value);//por = %
+				var dp = parseFloat(document.getElementById("dp").value);//desvio padrão
+				var n = parseFloat(document.getElementById("n1").value);
+				var medi = parseFloat(document.getElementById("media").value);
+				p= p/100;
+				p= p/2;
+				p= parseFloat(prompt(p +"informe o valor da tabela"));
+				console.log("valor de p:"+p);
+				console.log(n);
+				n = Math.pow(n, 0.5);
+				console.log(n);
+				n= (dp/n);
+				console.log(n);
+				var r = p*n;
+				r= r.toFixed(4);
+				console.log("valor de r:"+r);
+				var subitarcao=medi-r;
+				
+				r = subitarcao +" < "+ medi +" < "+ medi+" + "+r;
+				document.getElementById("resposta").innerHTML=r;
+				
+			}
+		</script>
+	</head>
+	<body>
+		<div>
+			<header>
+				<font color="white">
+					<h1>
+					Intervalo de confiansa 
+					</h1>
+				</font>
+				<font color="white">
+					<h2>
+						% <input type="number" id="por"/>
+						dp<input type="number" id="dp"/>
+						n <input type="number" id="n1">
+						media<input type="number" id="media">
+					</h2>
+				</font>
+				<BR/>
+				<div class="btn-list">
+					<a class="bln-1" onclick ="calcular()">calcular</a>
+					<a href="index.html"  class="btn-1" > voltar para tela inicial </a>
+				</div>
+				<BR/>
+				<font color= "white">
+					<h2 id ="resposta"><h2>
+				</font>
+			</header>
+		</div>
+	</body>
+</html>
